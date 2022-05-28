@@ -1,0 +1,191 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Hind&family=Lobster&family=Montserrat:wght@600&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+:root{
+    --main-bg-color: #f5f5f5;
+    --dark : #3F4656;
+    --gris-fonce : #474554;
+    --gris : #A3ABBD;
+    --cta-color-light: #DB6B8C;
+    --cta-color-dark: #A1365A;
+}
+body{
+    display:flex;
+    flex-direction: column;
+    background-color: var(--main-bg-color);
+    font-family: 'Hind', sans-serif;
+    color : var(--gris-fonce);
+    min-height: 100vh;
+
+}
+main{
+    flex-grow:1;
+}
+.bg-gris{
+    background-color: var(--gris);
+}
+.f-lobster{
+    font-family: 'Lobster', cursive;
+}
+.color-cta{
+    color: var(--cta-color-light);
+}
+.bg-cta{
+    background-color: var(--cta-color-light)!important;
+}
+.color-cta:hover{
+    color: var(--cta-color-dark);
+}
+html{
+    margin:0;
+    padding:0;
+}
+
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Montserrat', sans-serif;
+}
+
+/************************************************   navbar **********************************************************/
+
+.navbar{
+    font-size: 1.2rem;
+}
+
+.navbar-dark .nav-link {
+    color: rgba(255,255,255,.7);
+}
+.navbar-dark .nav-link:hover {
+    color: rgba(255,255,255,1);
+}
+.navbar-dark .navbar-nav .nav-link:hover{
+    color: rgba(255,255,255,1);
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255,.7);
+}
+.bg-dark{
+    background-color: var(--dark)!important;
+}
+
+/**************************** formulaire de contact page article *****************************************/
+
+.form-comment-group{
+    background: #DADADA;
+
+    color: black;
+}
+
+
+.reply{
+    width:80%;
+    text-align:right;
+}
+.max-800{
+    max-width: 800px!important;
+}
+
+.comment-list{
+    list-style: none;
+}
+.comment-list li{
+
+    border-bottom : 2px solid;
+}
+#comment_content{
+    height: 200px;
+}
+/************************************************ page d'accueil ****************************************************/
+
+.article-grid{
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+.article-grid:hover {
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+}
+.article-grid{
+    cursor:pointer;
+}
+/*************************************************** footer ******************************************************/
+.footer{
+
+    background-color: var(--dark);
+}
+
+.footer-nav{
+    display:block;
+
+ /*   align-items: center;
+    justify-content: center; */
+}
+.footer-nav ul{
+    list-style: none;
+}
+.footer-nav li{
+   /* display: inline-block;  */
+    margin: 0 1.5rem;
+}
+
+.footer-nav li a {
+    text-decoration: none;
+    color: var(--main-bg-color);
+    transition: all 0.3s ease 0s;
+}
+
+.footer-nav li a:hover {
+
+    color: #807f7f;
+}
+.footer p{
+    color: #bbbaba;
+    margin-bottom:0;
+}
+/***********************************    pagination *********************************************************/
+.pagination {
+   justify-content: center;
+    margin-top: 1.5rem;
+}
+.pagination .page a, .previous a, .next a, .last a, .first a{
+    background-color: var(--gris);
+    padding : 0.2rem 0.5rem;
+    margin : 0 0.5rem;
+}
+.pagination .current {
+    background-color: var(--dark);
+    color: var(--main-bg-color);
+    padding : 0.2rem 0.5rem ;
+    margin : -0.3rem 0.5rem;
+
+}
+
+.pagination a{
+    text-decoration: none;
+    color: var(--dark);
+}
+
+.pagination .last a::before{
+    content:"fin ";
+}
+.pagination .first a::after{
+    content:" Début";
+}
+/*---------------------------page de contact ------------------------------------------------- */
+#contact_message{
+    height: 200px;
+}
+
+.form-signin, .form-register{
+    width:100%;
+    max-width:330px;
+    margin:auto;
+}
+.form-register{
+    max-width: 450px;
+}
+
+

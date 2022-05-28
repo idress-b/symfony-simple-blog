@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire de contact{% endblock %}
+
+{% block body %}
+
+    <div class="container  mt-4">
+        <div class="max-800 m-auto mt-4 ">
+        <h1 class="my-5">Formulaire de contact</h1>
+        <p>Une question ? une suggestion ? Quel que soit votre message nous tacherons d'y répondre dans les plus brefs délais !</p>
+
+           {{ form_start(form) }}
+           {{ form_row(form.name) }}
+           {{ form_row(form.email) }}
+           {{ form_row(form.message) }}
+           <button class="w-100 btn btn-lg btn-secondary mt-2" type="submit">Envoyer</button>
+{{ form_end(form) }}
+       </div>
+
+    </div>
+
+
+
+{% endblock %}

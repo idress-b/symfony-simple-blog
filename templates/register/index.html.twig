@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="col-12 col-md-6 form-register">
+<h1 class="mb-5 h3">Formulaire d'inscription</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.pseudo) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.password) }}
+    <button type="submit" class="w-100 btn btn-lg btn-primary my-3">S'inscrire</button>
+    {{ form_end(form) }}
+            <hr>
+            <p>V0us avez déjà un compte ? <a href="{{ path('app_login') }}">Connectez-vous</a></p>
+        </div>
+
+    </div>
+{% endblock %}

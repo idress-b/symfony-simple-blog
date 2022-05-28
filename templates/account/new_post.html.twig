@@ -1,0 +1,22 @@
+{% extends 'account/baseAdmin.html.twig' %}
+
+{% block content_title 'Nouvel article' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-5">Nouvel article</h1>
+        {{form_start(form) }}
+        {{ form_row(form.title) }}
+        <img width="500" src="" id="file-preview" alt="">
+        {{ form_row(form.file) }}
+        {{ form_row(form.content) }}
+        <button type="submit" class="btn btn-primary">Publier</button>
+        {{ form_end(form) }}
+
+
+    </div>
+
+{% endblock %}
+{% block javascript %}
+<script src="{{ asset('js/img-preview.js') }}"></script>
+{% endblock %}

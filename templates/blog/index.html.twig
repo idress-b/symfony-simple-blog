@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Objectif Développeur | page d'accueil{% endblock %}
+
+{% block body %}
+
+
+       {% if app.request.get('page') == 1 or app.request.get('page') == null %}
+
+           <div class="px-5 py-5 mb-5 text-center bg-gris">
+
+
+               <div class="col-lg-6 mx-auto">
+                   <p class="fs-2 my-4 f-lobster ">Bienvenue dans le blog collaboratif qui vous apprend tout sur le métier de développeur</p>
+
+
+               </div>
+           </div>
+           <h1 class="text-center">Nos derniers articles </h1>
+       {% endif %}
+    <div class="container">
+
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-sm-12 col-md-6 col-lg-4 my-4 ">
+
+                 <article class="article-grid mx-xl-4 ">
+
+                    <div class="custom-card " >
+                        <img src="uploads/{{ post.image }}" class="card-img-top img-fluid" alt="...">
+                        <div class="p-3">
+                            <h2 class="card-title mt-2 fs-4"><b>{{ post.title }}</b></h2>
+                            <p>
+                                <small>Par {{ post.author.pseudo }} / le {{ post.publishedAt | format_date('long',locale='fr')}}  </small>
+                                <br><small>{{ post.validComments|length }} Commentaires</small>
+                            </p>
+                            <p class="card-text">{{ post.content| slice(0,200) |raw  }}</p>
+                            <p>
+                                <a class="my-3 color-cta" href="{{ path('blog_read',{id: post.id}) }}" >Lire Plus >></a>
+
+                            </p>
+                        </div>
+
+
+                    </div>
+
+                 </article>
+
+            </div>
+        {% endfor %}
+    </div>
+    {{ knp_pagination_render(posts) }}
+   </div>
+
+
+{% endblock %}
