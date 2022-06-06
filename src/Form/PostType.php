@@ -20,24 +20,23 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class,['label'=>'Titre'])
-            ->add('content',CKEditorType::class, [
-                'label'=> "Corps de l'article",
+            ->add('title', TextType::class, ['label' => 'Titre'])
+            ->add('content', CKEditorType::class, [
+                'label' => "Corps de l'article",
+                'config' => ['height' => '600px']
 
             ])
-            ->add("file",FileType::class,[
+            ->add("file", FileType::class, [
                 "required" => false,
-                "label"=> "Fichier image",
+                "label" => "Image de couverture",
                 "mapped" => false,
-                "constraints" =>[
-                    new Image(),
-                    new NotNull([
-                        "groups" => "create"
-                    ])
-                ]
-            ])
-
-        ;
+                // "constraints" => [
+                //     new Image(),
+                //     new NotNull([
+                //         "groups" => "create"
+                //     ])
+                // ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

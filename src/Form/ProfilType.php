@@ -17,21 +17,21 @@ class ProfilType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-           ->add("file",FileType::class,[
+            ->add("file", FileType::class, [
                 "required" => false,
-                "label"=> "Fichier image",
+                "label" => "Fichier image",
                 "mapped" => false,
-                "constraints" =>[
+                "constraints" => [
                     new Image()
                 ]
             ])
             ->add('pseudo')
             ->add('titre')
 
-            ->add('bio',TextareaType::class,[
-                'attr'=>[ 'placeholder'=>'Vous pouvez en dire un peu plus sur vous']
-            ])
-        ;
+            ->add('bio', TextareaType::class, [
+                "required" => false,
+                'attr' => ['placeholder' => 'Dites nous quelque chose à propos de vous']
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
