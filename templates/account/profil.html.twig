@@ -5,14 +5,21 @@
 {% block body %}
 	<div class="container max-800 ">
 		<h1 class="my-5 text-center">Gestion de votre profil</h1>
-		<img src="/img/{{ avatar }}" id="img-avatar" class="rounded-circle d-inline m-auto" width="150" height="150" alt="">
-		<a class="btn btn-danger" href="{{ path('profil_delete') }}">
-			<i class="fa-solid fa-trash-can"></i>Supprimer la photo</a>
 		{{ form_start(form) }}
-		{{ form_row(form.file) }}
 		{{ form_row(form.pseudo) }}
 		{{ form_row(form.titre) }}
 		{{ form_row(form.bio) }}
+		<div class="mb-3 avatar-box">
+			<p>Image de votre avatar</p>
+			<div class="avatar-container">
+				<img src="/uploads/{{ avatar }}" id="img-avatar" class="rounded-circle d-inline m-auto" width="80" height="80" alt="">
+				{{ form_row(form.file) }}
+
+			</div>
+		</div>
+		<a id="delete-avatar-btn" class="btn btn-danger" href="{{ path('profil_delete') }}">
+			<i class="fa-solid fa-trash-can"></i>
+			Supprimer la photo</a>
 		<button type="submit" class="w-100  my-5 btn btn-primary">Enregistrer les modifications</button>
 		{{ form_end(form) }}
 	</div>

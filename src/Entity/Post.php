@@ -36,7 +36,7 @@ class Post
 
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,  nullable=true)
 
      */
     private $image;
@@ -44,7 +44,7 @@ class Post
     /**
      * @return mixed
      */
-    public function getImage():?string
+    public function getImage(): ?string
     {
         return $this->image;
     }
@@ -76,7 +76,7 @@ class Post
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isPublished= false;
+    private $isPublished = false;
 
 
 
@@ -85,7 +85,7 @@ class Post
 
     public function __construct()
     {
-        $this->publishedAt= new \DateTimeImmutable();
+        $this->publishedAt = new \DateTimeImmutable();
         $this->comments = new ArrayCollection();
     }
 
@@ -146,9 +146,9 @@ class Post
 
     public function getValidComments()
     {
-       $validComments = $this->getComments()->filter(function(Comment $comment){
-           return $comment->getIsValidatedByAdmin() == true ;
-       });
+        $validComments = $this->getComments()->filter(function (Comment $comment) {
+            return $comment->getIsValidatedByAdmin() == true;
+        });
         return $validComments;
     }
 
@@ -199,8 +199,4 @@ class Post
 
         return $this;
     }
-
-
-
-
 }

@@ -188,4 +188,31 @@ h1,h2,h3,h4,h5,h6{
     max-width: 450px;
 }
 
+/*******************************Page administration****************/
+.admin-sidebar{
+    max-width: 280px;
+    
+} 
 
+
+
+/*******************************Page du profil***********************/
+.avatar-box > p {
+    margin-bottom:0.6rem;
+}
+.avatar-container{
+    border: 1px solid rgb(227, 227, 227);
+    border-radius:4px;
+    padding:10px;
+    display:flex;
+    align-items:center;
+
+}
+.avatar-container>div{
+    flex-grow:1;
+    margin:15px;
+}
+
+.avatar-container >div>label{
+display:none;
+}
