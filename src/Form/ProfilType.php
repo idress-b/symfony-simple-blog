@@ -26,7 +26,6 @@ class ProfilType extends AbstractType
                 ]
             ])
             ->add('pseudo')
-            ->add('titre')
 
             ->add('bio', TextareaType::class, [
                 "required" => false,

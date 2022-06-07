@@ -135,4 +135,18 @@ class AccountController extends AbstractController
 
         ]);
     }
+
+    /** 
+     * @Route("/supprimer-article/{id}", name="delete_post")
+     */
+    public function deletePost(
+        EntityManagerInterface $em,
+        PostRepository $postRepository,
+        Post $post
+    ) {
+        $postRepository->remove($post);
+        $em->flush();
+        // 4 : redirect to route index
+        return $this->redirectToRoute('account_show_posts');
+    }
 }

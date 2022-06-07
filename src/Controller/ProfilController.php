@@ -15,20 +15,22 @@ class ProfilController extends AbstractController
     /**
      * @Route("/compte/profil", name="profil")
      */
-    public function index(Request $request,
-                          EntityManagerInterface $em,
-                          SluggerInterface $slugger,
-                          string $uploadsAbsoluteDir,
-                          string $uploadsRelativeDir): Response
-    {
-       $user = $this->getUser();
-       $form = $this->createForm(ProfilType::class,$user)->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
-            $file= $form->get("file")->getData();
-            if($file !== null) {
-                $fileName = sprintf("%s_%s.%s",
+    public function index(
+        Request $request,
+        EntityManagerInterface $em,
+        SluggerInterface $slugger,
+        string $uploadsAbsoluteDir,
+        string $uploadsRelativeDir
+    ): Response {
+        $user = $this->getUser();
+        $form = $this->createForm(ProfilType::class, $user)->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get("file")->getData();
+            if ($file !== null) {
+                $fileName = sprintf(
+                    "%s_%s.%s",
                     $slugger->slug($file->getClientOriginalName()),
-                    uniqid() ,
+                    uniqid(),
                     $file->getClientOriginalExtension()
                 );
 
@@ -41,21 +43,28 @@ class ProfilController extends AbstractController
         }
         $avatar = $user->getAvatar();
         if ($avatar == null) {
-            $avatar= 'avatar.jpg';
+            $avatar = 'avatar.jpg';
         }
 
         return $this->render('account/profil.html.twig', [
-            'avatar'=>$avatar,
-                    'form'=>$form->createView()
+            'avatar' => $avatar,
+            'form' => $form->createView()
         ]);
     }
 
     /**
      * @Route("/compte/profil/delete-avatar", name="profil_delete")
      */
-    public function deleteAvatar(EntityManagerInterface $em)
+    public function deleteAvatar(EntityManagerInterface $em,  string $uploadsAbsoluteDir)
     {
         $user = $this->getUser();
+
+        // On tocke l'ancienne image et on la supprime du dossier
+        $tempImg = $user->getAvatar();
+        $tempFile = $uploadsAbsoluteDir . "/" . $tempImg;
+        unlink($tempFile);
+
+        // on met une image d'avatar vide
         $user->setAvatar('avatar.jpg');
         $em->flush();
         return $this->redirectToRoute("profil");

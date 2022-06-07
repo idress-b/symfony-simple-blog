@@ -55,10 +55,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->registeredAt= new \DateTimeImmutable();
+        $this->registeredAt = new \DateTimeImmutable();
 
         $this->posts = new ArrayCollection();
-
     }
     public function __toString()
     {
@@ -96,10 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $posts;
 
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $titre;
+
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -230,17 +226,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getTitre(): ?string
-    {
-        return $this->titre;
-    }
 
-    public function setTitre(?string $titre): self
-    {
-        $this->titre = $titre;
-
-        return $this;
-    }
 
     public function getAvatar(): ?string
     {
