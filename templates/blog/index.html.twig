@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}Objectif Développeur | page
-																																																																			d'accueil
+																																																																					d'accueil
 {% endblock %}
 {% block body %}
 	{% if app.request.get('page') == 1 or
@@ -33,7 +33,7 @@ app.request.get('page') == null %}
 												<strong>
 													{{ post.author.pseudo }}</strong>
 												/ Le
-												{{ post.publishedAt | format_date('long',locale='fr')}}
+												{{ post.publishedAt | date('m/d/Y')}}
 											</small>
 
 										</div>
