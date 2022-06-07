@@ -6,9 +6,9 @@
 	{% if app.request.get('page') == 1 or
 app.request.get('page') == null %}
 
-		<div class="p-0 m-0 text-center bg-gris">
-			<div class="container">
-				<img src="uploads/banner.jpg" alt="bannière">
+		<div class="p-0 m-0 mx-auto banner">
+			<div class="container text-center">
+				<img class="img-fluid w-100" src="img/banner.jpg" alt="bannière">
 			</div>
 		</div>
 	{% endif %}
@@ -18,7 +18,7 @@ app.request.get('page') == null %}
 				{% if app.request.get('page') == 1 or
 app.request.get('page') == null %}
 
-					<h3 class="text-center mb-2">Nos derniers articles</h3>
+					<h3 class="text-center my-4">Nos derniers articles</h3>
 					{% endif%}
 					{% for post in posts %}
 						<a class="link-neutral" href="{{ path('blog_read', { id: post.id }) }}">
@@ -65,8 +65,10 @@ app.request.get('page') == null %}
 					{% endfor %}
 					{{ knp_pagination_render(posts) }}
 				</div>
+				<div class="d-none d-lg-block col-lg-3 right-sidebar ">
+					<img class="img-fluid w-100 " src="img/job_board.jpg" alt="offres d'emploi">
+				</div>
 			</div>
 		</div>
-		<div class="d-none col-lg-3 right-sidebar"></div>
 
 	{% endblock %}

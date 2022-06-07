@@ -29,8 +29,9 @@ main{
 .bg-gris{
     background-color: var(--gris);
 }
-.f-lobster{
-    font-family: 'Lobster', cursive;
+
+.banner{
+    background-color: #0B1D41;
 }
 .color-cta{
     color: var(--cta-color-light);
