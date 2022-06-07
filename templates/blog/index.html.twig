@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}Objectif Développeur | page
-																																																															d'accueil
+																																																																			d'accueil
 {% endblock %}
 {% block body %}
 	{% if app.request.get('page') == 1 or
@@ -13,7 +13,7 @@ app.request.get('page') == null %}
 		</div>
 	{% endif %}
 	<div class="container">
-		<div class="row">
+		<div class="row mt-4">
 			<div class="col-12 col-lg-9">
 				{% if app.request.get('page') == 1 or
 app.request.get('page') == null %}
@@ -65,8 +65,8 @@ app.request.get('page') == null %}
 					{% endfor %}
 					{{ knp_pagination_render(posts) }}
 				</div>
-				<div class="d-none d-lg-block col-lg-3 right-sidebar ">
-					<img class="img-fluid w-100 " src="img/job_board.jpg" alt="offres d'emploi">
+				<div class="d-none d-lg-block col-lg-3 right-sidebar mt-3">
+					<img class="img-fluid w-100 rounded-2 " src="img/job_board.jpg" alt="offres d'emploi">
 				</div>
 			</div>
 		</div>
