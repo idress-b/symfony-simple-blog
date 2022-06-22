@@ -3,16 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+
 use App\Form\PostType;
 use App\Repository\PostRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\FileUploader;
 use Knp\Component\Pager\Paginator;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/compte", name="account_")
@@ -50,10 +52,10 @@ class AccountController extends AbstractController
     public function create(
         EntityManagerInterface $em,
         Request $request,
-        SluggerInterface $slugger,
-        string $uploadsAbsoluteDir,
-        string $uploadsRelativeDir
+        FileUploader $fileUploader
     ) {
+
+
         $post = new Post();
         $form = $this->createForm(PostType::class, $post, ["validation_groups" => ["Default", "create"]])
             ->handleRequest($request);
@@ -61,15 +63,17 @@ class AccountController extends AbstractController
             $file = $form->get("file")->getData();
             if ($file) {
 
-                $fileName = sprintf(
-                    "%s_%s.%s",
-                    $slugger->slug($file->getClientOriginalName()),
-                    uniqid(),
-                    $file->getClientOriginalExtension()
-                );
+                // $fileName = sprintf(
+                //     "%s_%s.%s",
+                //     $slugger->slug($file->getClientOriginalName()),
+                //     uniqid(),
+                //     $file->getClientOriginalExtension()
+                // );
 
-                $file->move($uploadsAbsoluteDir, $fileName);
 
+
+                // $file->move($uploadsAbsoluteDir, $fileName);
+                $fileName = $fileUploader->upload($file);
                 $post->setImage($fileName);
             }
 

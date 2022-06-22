@@ -30,12 +30,11 @@ class PostType extends AbstractType
                 "required" => false,
                 "label" => "Image de couverture",
                 "mapped" => false,
-                // "constraints" => [
-                //     new Image(),
-                //     new NotNull([
-                //         "groups" => "create"
-                //     ])
-                // ]
+                "constraints" => [
+                    new Image()
+
+
+                ]
             ]);
     }
 
