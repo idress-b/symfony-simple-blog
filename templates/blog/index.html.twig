@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}Objectif Développeur | page
-																																																																					d'accueil
+{% block title %}Objectif Développeur | page d'accueil
 {% endblock %}
 {% block body %}
 	{% if app.request.get('page') == 1 or
@@ -52,9 +51,9 @@ app.request.get('page') == null %}
 												</div>
 
 											</div>
-											<div class="w-50 align-self-center me-3">
+											<div class="align-self-center me-3 pb-3">
 												{% if post.image%}
-													<img src="uploads/{{ post.image }}" width="100%" class=" img-fluid" alt="..."/>
+													<img src="uploads/{{ post.image }}" width="180" class=" img-fluid" alt="..."/>
 												{% endif %}
 											</div>
 										</div>

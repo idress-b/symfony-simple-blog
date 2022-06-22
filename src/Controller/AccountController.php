@@ -63,16 +63,6 @@ class AccountController extends AbstractController
             $file = $form->get("file")->getData();
             if ($file) {
 
-                // $fileName = sprintf(
-                //     "%s_%s.%s",
-                //     $slugger->slug($file->getClientOriginalName()),
-                //     uniqid(),
-                //     $file->getClientOriginalExtension()
-                // );
-
-
-
-                // $file->move($uploadsAbsoluteDir, $fileName);
                 $fileName = $fileUploader->upload($file);
                 $post->setImage($fileName);
             }
@@ -97,11 +87,10 @@ class AccountController extends AbstractController
         EntityManagerInterface $em,
         Post $post,
         Request $request,
-        SluggerInterface $slugger,
         string $uploadsAbsoluteDir,
-        string $uploadsRelativeDir
+        FileUploader $fileUploader
     ) {
-
+        // on recupère les infos de l'image en base de données 
         $tempImg = $post->getImage();
         $tempFile = $uploadsAbsoluteDir . "/" . $tempImg;
 
@@ -110,20 +99,13 @@ class AccountController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get("file")->getData();
             if ($file) {
-                $fileName = sprintf(
-                    "%s_%s.%s",
-                    $slugger->slug($file->getClientOriginalName()),
-                    uniqid(),
-                    $file->getClientOriginalExtension()
-                );
+                $fileName = $fileUploader->upload($file);
+                $post->setImage($fileName);
 
-                $file->move($uploadsAbsoluteDir, $fileName);
-
-                if (file_exists($tempImg)) {
+                //on supprime l'ancienne image
+                if ($tempImg && file_exists($tempFile)) {
                     unlink($tempFile);
                 }
-                /* supprime le fichier du dossier ***/
-                $post->setImage($fileName);
             }
 
             $post->setAuthor($this->getUser());
@@ -146,8 +128,16 @@ class AccountController extends AbstractController
     public function deletePost(
         EntityManagerInterface $em,
         PostRepository $postRepository,
-        Post $post
+        Post $post,
+        $uploadsAbsoluteDir
     ) {
+        $tempImg = $post->getImage();
+        $tempFile = $uploadsAbsoluteDir . "\\" . $tempImg;
+
+        /* supprime le fichier du dossier ***/
+        if ($tempImg && file_exists($tempFile)) {
+            unlink($tempFile);
+        }
         $postRepository->remove($post);
         $em->flush();
         // 4 : redirect to route index
