@@ -1,6 +1,9 @@
 {% extends 'account/baseAdmin.html.twig' %}
 
 {% block content_title 'Nouvel article' %}
+{% block style %}
+<link rel="stylesheet" href="{{ asset('css/ckeditor.css') }}">
+{% endblock %}
 
 {% block body %}
     <div class="container">
@@ -9,8 +12,11 @@
         {{ form_row(form.title) }}
         <img width="500" src="" id="file-preview" alt="">
         {{ form_row(form.file) }}
-        {{ form_row(form.content) }}
-        <button type="submit" class="btn btn-primary">Publier</button>
+        {# {{ form_row(form.content) }} #}
+        <p>Corps de l'article</p>
+        <div id="editor"></div>
+       
+        <button type="submit" class="btn ntn-lg btn-primary mt-4">Publier</button>
         {{ form_end(form) }}
 
 
@@ -19,4 +25,6 @@
 {% endblock %}
 {% block javascript %}
 <script src="{{ asset('js/img-preview.js') }}"></script>
+<script src="{{ asset('ckeditor5/ckeditor.js')}}"></script>
+<script src="{{ asset('js/ckeditor_init.js')}}"></script>
 {% endblock %}

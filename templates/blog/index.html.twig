@@ -10,7 +10,11 @@ app.request.get('page') == null %}
 				<img class="img-fluid w-100" src="img/banner.jpg" alt="bannière">
 			</div>
 		</div>
+
+		
 	{% endif %}
+
+
 	<div class="container">
 		<div class="row mt-4">
 			<div class="col-12 col-lg-9">
@@ -53,7 +57,7 @@ app.request.get('page') == null %}
 											</div>
 											<div class="align-self-center me-3 pb-3">
 												{% if post.image%}
-													<img src="uploads/{{ post.image }}" width="180" class=" img-fluid" alt="..."/>
+													<img src="{{ post.getImageUrl }}" width="180" class=" img-fluid" alt="..."/>
 												{% endif %}
 											</div>
 										</div>

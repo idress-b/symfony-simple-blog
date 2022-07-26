@@ -71,7 +71,7 @@ class AccountController extends AbstractController
             $post->setAuthor($this->getUser());
             $em->persist($post);
             $em->flush();
-            return $this->redirectToRoute("blog_read", ["id" => $post->getId()]);
+            return $this->redirectToRoute("account_show_posts");
         }
         return $this->render("account/new_post.html.twig", [
 
@@ -129,15 +129,12 @@ class AccountController extends AbstractController
         EntityManagerInterface $em,
         PostRepository $postRepository,
         Post $post,
-        $uploadsAbsoluteDir
+        FileUploader $fileUploader
     ) {
-        $tempImg = $post->getImage();
-        $tempFile = $uploadsAbsoluteDir . "\\" . $tempImg;
+        $ImageFile = $post->getImage();
 
-        /* supprime le fichier du dossier ***/
-        if ($tempImg && file_exists($tempFile)) {
-            unlink($tempFile);
-        }
+        $fileUploader->deleteFile($ImageFile);
+       
         $postRepository->remove($post);
         $em->flush();
         // 4 : redirect to route index

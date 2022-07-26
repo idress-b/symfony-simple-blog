@@ -4,11 +4,12 @@ namespace App\Form;
 
 use App\Entity\Post;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Image;
@@ -21,11 +22,7 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, ['label' => 'Titre'])
-            ->add('content', CKEditorType::class, [
-                'label' => "Corps de l'article",
-                'config' => ['height' => '600px']
-
-            ])
+            ->add('content',HiddenType::class)
             ->add("file", FileType::class, [
                 "required" => false,
                 "label" => "Image de couverture",

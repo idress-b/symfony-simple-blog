@@ -9,7 +9,7 @@
 			Commentaires /
 			{{ post.author.pseudo }}</p>
 		<div class="text-center mb-5 ">
-			<img width="650" class="img-fluid" src="uploads/{{ post.image }}" alt=""><br>
+			<img width="650" class="img-fluid" src="{{ post.getImageUrl }}" alt=""><br>
 		</div>
 
 		<p>{{ post.content |raw }}</p>
@@ -45,15 +45,15 @@
 
 		</div>
 		<!-----------      Formulaire de soumission de commentaires ----------------------------------------------------------------- -->
-		<div class="form-comment-group p-md-5 p-2 border-md-5 mt-5 ">
+		<div class="form-comment-group p-md-4 p-2 border-md-5 mt-2 ">
 
-			<p class="fs-4 fw-bold lh-1">Laisser un commentaire</p>
-			<p class="fs-6 fw-normal">Tous les champs sont requis</p><br>
+			<p class="fs-4 fw-bold m-0">Laisser un commentaire</p>
+			<p class="fs-6 fw-normal fw-light fst-italic">Tous les champs sont requis</p>
 			{{ form_start(form) }}
 			{{ form_row(form.author) }}
 
 			{{ form_row(form.content) }}
-			<button type="submit" class="btn btn-secondary btn-lg mb-3 mt-4 white">Poster le commentaire</button>
+			<button type="submit" class="btn btn-secondary btn-lg mb-1 mt-2 white">Poster le commentaire</button>
 			{{ form_end(form) }}
 		</div>
 

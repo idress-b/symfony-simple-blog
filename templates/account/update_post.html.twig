@@ -1,22 +1,20 @@
-{% extends 'account/baseAdmin.html.twig' %}
+{% extends 'account/baseAdmin.html.twig' %} {% block content_title 'Nouvel
+article' %} {% block body %}
+<div class="container">
+  <h1 class="my-5">Modifier un article</h1>
+  {{ form_start(form) }}
+  {{ form_row(form.title) }}
+  <img width="500" src=" /uploads/{{ img }}" id="file-preview" alt="" />
+  {{ form_row(form.file) }}
+  <p>Corps de l'article</p>
+  <div id="editor"></div>
+  <button type="submit" class="btn btn-primary">Valider la Modification</button>
+  {{ form_end(form) }}
+</div>
 
-{% block content_title 'Nouvel article' %}
-
-{% block body %}
-	<div class="container">
-		<h1 class="my-5">Modifier un article</h1>
-		{{form_start(form) }}
-		{{ form_row(form.title) }}
-		<img width="500" src=" /uploads/{{ img }}" id="file-preview" alt="">
-		{{ form_row(form.file) }}
-		{{ form_row(form.content) }}
-		<button type="submit" class="btn btn-primary">Valider la Modification</button>
-		{{ form_end(form) }}
-
-
-	</div>
-
-{% endblock %}
+{% endblock %} 
 {% block javascript %}
-	<script src="{{ asset('js/img-preview.js') }}"></script>
+  <script src="{{ asset('js/img-preview.js') }}"></script>
+  <script src="{{ asset('ckeditor5/ckeditor.js') }}"></script>
+  <script src="{{ asset('js/ckeditor_init.js') }}"></script>
 {% endblock %}

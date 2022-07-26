@@ -41,6 +41,12 @@ class Post
      */
     private $image;
 
+    public function __construct()
+    {
+        $this->publishedAt = new \DateTimeImmutable();
+        $this->comments = new ArrayCollection();
+    }
+
     /**
      * @return mixed
      */
@@ -78,16 +84,6 @@ class Post
      */
     private $isPublished = false;
 
-
-
-
-
-
-    public function __construct()
-    {
-        $this->publishedAt = new \DateTimeImmutable();
-        $this->comments = new ArrayCollection();
-    }
 
     public function __toString()
     {
@@ -198,5 +194,10 @@ class Post
         $this->isPublished = $isPublished;
 
         return $this;
+    }
+
+    public function getImageUrl(): string
+    {
+        return "https://objectif-developpeur.s3.eu-west-3.amazonaws.com/".$this->image;
     }
 }

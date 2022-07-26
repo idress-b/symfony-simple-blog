@@ -58,8 +58,13 @@
 								</a>
 
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									{% if is_granted("ROLE_ADMIN") %}
 									<li>
-										<a class="dropdown-item" href="{{ path('account_index') }}">Compte</a>
+										<a class="dropdown-item" href="{{ path('admin') }}">Dashboard administrateur</a>
+									</li>
+									{%  endif %}
+									<li>
+										<a class="dropdown-item" href="{{ path('account_index') }}">profil</a>
 									</li>
 									<li>
 										<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
