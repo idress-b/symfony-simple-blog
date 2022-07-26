@@ -51,7 +51,7 @@ class Comment
     public function __construct()
     {
         $this->postedAt = new \DateTimeImmutable();
-        $this->isValidatedByAdmin = false;
+        $this->isValidatedByAdmin = true;
     }
 
     public function getId(): ?int

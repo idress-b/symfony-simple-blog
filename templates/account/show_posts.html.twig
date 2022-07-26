@@ -21,7 +21,7 @@
 					<tr>
 						<th scope="row">{{ post.id }}</th>
 						<td>{{ post.title }}</td>
-						<td><img src="/uploads/{{ post.image }}" alt="" width="100"></td>
+						<td><img src="{{ post.getImageUrl }}" alt="" width="100"></td>
 						<td>{{ post.content| slice(0,200) |raw  }}</td>
 						<td>
 							<a href="{{ path('blog_read',{'id': post.id}) }}">Voir

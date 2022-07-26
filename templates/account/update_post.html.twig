@@ -4,7 +4,7 @@ article' %} {% block body %}
   <h1 class="my-5">Modifier un article</h1>
   {{ form_start(form) }}
   {{ form_row(form.title) }}
-  <img width="500" src=" /uploads/{{ img }}" id="file-preview" alt="" />
+  <img width="500" src="{{ img }}" id="file-preview" alt="" />
   {{ form_row(form.file) }}
   <p>Corps de l'article</p>
   <div id="editor"></div>

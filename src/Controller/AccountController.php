@@ -92,8 +92,7 @@ class AccountController extends AbstractController
     ) {
         // on recupère les infos de l'image en base de données 
         $tempImg = $post->getImage();
-        $tempFile = $uploadsAbsoluteDir . "/" . $tempImg;
-
+       
         $form = $this->createForm(PostType::class, $post)
             ->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -103,8 +102,8 @@ class AccountController extends AbstractController
                 $post->setImage($fileName);
 
                 //on supprime l'ancienne image
-                if ($tempImg && file_exists($tempFile)) {
-                    unlink($tempFile);
+                if ($tempImg) {
+                    $fileUploader->deleteFile($tempImg);
                 }
             }
 
@@ -117,7 +116,7 @@ class AccountController extends AbstractController
         return $this->render("account/update_post.html.twig", [
 
             "form" => $form->createView(),
-            "img" => $post->getImage()
+            "img" => $post->getImageUrl()
 
         ]);
     }
