@@ -84,6 +84,12 @@ class Post
      */
     private $isPublished = false;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
 
     public function __toString()
     {
@@ -199,5 +205,17 @@ class Post
     public function getImageUrl(): string
     {
         return "https://objectif-developpeur.s3.eu-west-3.amazonaws.com/".$this->image;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }

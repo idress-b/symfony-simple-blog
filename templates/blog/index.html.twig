@@ -30,13 +30,13 @@ app.request.get('page') == null %}
 									<div class="custom-card">
 
 										<div class="d-flex align-items-center">
-											<img class='rounded-circle m-2' width="32" heigh='32' src="uploads/{{ post.author.avatar}}" alt="{{post.author}}">
+											<img class='rounded-circle m-2' width="32" heigh='32' src="{{ post.author.getAvatarUrl }}" alt="{{post.author}}">
 
 											<small>
 												<strong>
 													{{ post.author.pseudo }}</strong>
 												/ Le
-												{{ post.publishedAt | date('m/d/Y')}}
+												{{ post.publishedAt | date('d/m/Y')}}
 											</small>
 
 										</div>

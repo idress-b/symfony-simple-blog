@@ -240,6 +240,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getAvatarUrl(): string
+    {
+        return "https://objectif-developpeur.s3.eu-west-3.amazonaws.com/".$this->avatar;
+    }
+
     public function getBio(): ?string
     {
         return $this->bio;

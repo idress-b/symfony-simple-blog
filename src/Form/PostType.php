@@ -2,10 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Post;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,6 +24,12 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, ['label' => 'Titre'])
+            ->add('category',EntityType::class,[
+                'label'=>'choisir la catégorie',
+                'required'=>true,
+                'class'=>Category::class,
+              
+            ])
             ->add('content',HiddenType::class)
             ->add("file", FileType::class, [
                 "required" => false,

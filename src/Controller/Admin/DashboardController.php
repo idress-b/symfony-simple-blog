@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Entity\User;
@@ -43,6 +44,8 @@ class DashboardController extends AbstractDashboardController
             ->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Articles', 'fas fa-user', Post::class);
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-user', Comment::class)
+            ->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('Categories', 'fas fa-user', Category::class)
             ->setPermission('ROLE_ADMIN');
     }
 

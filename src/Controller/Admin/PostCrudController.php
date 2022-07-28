@@ -51,11 +51,12 @@ class PostCrudController extends AbstractCrudController
             AssociationField::new('author','Auteur')
                                ->hideOnForm(),
             TextField::new('title','Titre') ,
+            AssociationField::new('category','Catégorie'),
             ImageField::new('image')
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads/')
                 ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]')
-            ->setRequired(false),
+                ->setRequired(false),
             TextEditorField::new('content','Contenu')
                 ->setNumOfRows(30)
             ,

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Service\FileUploader;
 
 class ProfilController extends AbstractController
 {
@@ -19,22 +20,15 @@ class ProfilController extends AbstractController
         Request $request,
         EntityManagerInterface $em,
         SluggerInterface $slugger,
-        string $uploadsAbsoluteDir,
-        string $uploadsRelativeDir
+        FileUploader $fileUploader
+        
     ): Response {
         $user = $this->getUser();
         $form = $this->createForm(ProfilType::class, $user)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get("file")->getData();
-            if ($file !== null) {
-                $fileName = sprintf(
-                    "%s_%s.%s",
-                    $slugger->slug($file->getClientOriginalName()),
-                    uniqid(),
-                    $file->getClientOriginalExtension()
-                );
-
-                $file->move($uploadsAbsoluteDir, $fileName);
+            if ($file) {
+                $fileName = $fileUploader->upload($file);
 
                 $user->setAvatar($fileName);
             }
