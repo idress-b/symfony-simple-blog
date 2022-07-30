@@ -87,7 +87,6 @@ class AccountController extends AbstractController
         EntityManagerInterface $em,
         Post $post,
         Request $request,
-        string $uploadsAbsoluteDir,
         FileUploader $fileUploader
     ) {
         // on recupère les infos de l'image en base de données 

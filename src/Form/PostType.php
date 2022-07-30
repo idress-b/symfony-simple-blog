@@ -17,9 +17,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\ImageValidator;
 use Symfony\Component\Validator\Constraints\NotNull;
+use App\Form\dataTransformer\TagsDataTransformer;
 
 class PostType extends AbstractType
 {
+   public function __construct(private TagsDataTransformer $transformer){} 
+   
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -40,7 +43,11 @@ class PostType extends AbstractType
 
 
                 ]
-            ]);
+            ])
+            ->add('tags',TextType::class);
+
+        $builder->get('tags')
+        ->addModelTransformer($this->transformer);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

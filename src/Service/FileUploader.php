@@ -16,11 +16,9 @@ class FileUploader
     private $s3Bucket;
 
     public function __construct(
-        SluggerInterface $slugger,
-        string $uploadsAbsoluteDir
-      
+        SluggerInterface $slugger
     ) {
-        $this->uploadsAbsoluteDir = $uploadsAbsoluteDir;
+       
         $this->slugger = $slugger;
         $this->s3Key = $_ENV['AWS_KEY'];
         $this->s3Secret = $_ENV['AWS_SECRET'];
