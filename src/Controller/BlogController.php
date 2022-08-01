@@ -11,10 +11,10 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use Knp\Component\Pager\PaginatorInterface;
 
 class BlogController extends AbstractController
 {
@@ -23,13 +23,14 @@ class BlogController extends AbstractController
      */
     public function index(Request $request, PostRepository $repository, PaginatorInterface $paginator): Response
     {
-        $donnees = $repository->findBy([], ['publishedAt' => 'desc']);
+        // $donnees = $repository->findBy([], ['publishedAt' => 'desc']);
+        $donnees = $repository->findPostsWithCommentsAndTags();
         $posts = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             6 // Nombre de résultats par page
         );
-
+       
         return $this->render('blog/index.html.twig', [
             'posts' => $posts,
         ]);

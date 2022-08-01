@@ -32,10 +32,10 @@ app.request.get('page') == null %}
 										<div class="d-flex align-items-center">
 											<img class='rounded-circle m-2' width="32" heigh='32' src="{{ post.author.getAvatarUrl }}" alt="{{post.author}}">
 
-											<small>
+											<small> écrit par
 												<strong>
 													{{ post.author.pseudo }}</strong>
-												/ Le
+												 le
 												{{ post.publishedAt | date('d/m/Y')}}
 											</small>
 
@@ -46,6 +46,10 @@ app.request.get('page') == null %}
 													<h2 class="card-title mt-2 fs-4">
 														<b>{{ post.title }}</b>
 													</h2>
+
+													{% for tag in post.tags %}
+						 <a class="text-decoration-none text-dark" href="{{path("app_tag",{id: tag.id})}}"><span	class="hashtag">{{ tag }}</span></a>
+							{% endfor %}
 													<p class="card-text pb-0">{{ post.content| slice(0,200) |raw  }}...</p>
 													<p>
 

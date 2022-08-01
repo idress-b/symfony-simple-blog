@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Post;
+use App\Service\FileUploaderNoSlug;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -13,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -47,23 +49,27 @@ class PostCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+          
         return [
             AssociationField::new('author','Auteur')
                                ->hideOnForm(),
             TextField::new('title','Titre') ,
             AssociationField::new('category','Catégorie'),
+            AssociationField::new('tags','tags'),
             ImageField::new('image')
-                ->setBasePath('uploads/')
+                ->setBasePath('https://objectif-developpeur.s3.eu-west-3.amazonaws.com/')
                 ->setUploadDir('public/uploads/')
-                ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]')
-                ->setRequired(false),
+                ->setUploadedFileNamePattern('[slug]-[uuid].[extension]')
+                ->setRequired(false)
+                 ,
             TextEditorField::new('content','Contenu')
                 ->setNumOfRows(30)
             ,
 
             DateField::new('publishedAt','Date')->hideOnForm(),
             AssociationField::new('comments','commentaires')
-                ->hideOnForm()
+                ->hideOnForm(),
+            BooleanField::new('isPublished','Validé')
 
 
         ];

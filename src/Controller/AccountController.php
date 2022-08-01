@@ -35,7 +35,11 @@ class AccountController extends AbstractController
     public function ShowPosts(PostRepository $repository, Request $request, PaginatorInterface $paginator): Response
     {
         $user = $this->getUser();
-        $donnees = $repository->findBy(['author' => $user], ['publishedAt' => 'desc']);
+       
+
+             $donnees = $repository->findBy(['author' => $user], ['publishedAt' => 'desc']);
+         
+
         $posts = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
@@ -71,6 +75,9 @@ class AccountController extends AbstractController
             $post->setAuthor($this->getUser());
             $em->persist($post);
             $em->flush();
+
+            $this->addFlash('success','Article créé avec succès');
+
             return $this->redirectToRoute("account_show_posts");
         }
         return $this->render("account/new_post.html.twig", [
@@ -110,7 +117,9 @@ class AccountController extends AbstractController
 
             $em->flush();
 
-            return $this->redirectToRoute("blog_read", ["id" => $post->getId()]);
+            $this->addFlash('success','Article modifié avec succès');
+
+            return $this->redirectToRoute("account_show_posts");
         }
         return $this->render("account/update_post.html.twig", [
 

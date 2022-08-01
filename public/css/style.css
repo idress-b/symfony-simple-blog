@@ -120,11 +120,13 @@ div.right-sidebar img {
     border: 1px solid rgb(217, 217, 217);
     border-radius:5px;
     background-color: white;
-
 }
+/* 
 .article-grid:hover {
-    /* box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px; */
+     box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px; 
 }
+ */
+
 .article-grid{
     cursor:pointer;
 }
@@ -237,4 +239,18 @@ display:none;
 /****************************************************ck editor ******************/
 .ck-editor__editable_inline {
     min-height: 400px;
+}
+
+.hashtag{
+    padding:0.2rem 0.5rem 0 0.5rem;
+}
+.hashtag::before{
+    content:'#';
+}
+
+.hashtag:hover{
+    
+    background:#c7c7c8;
+    border-radius: 7px;
+    /* padding:0.2rem 0.5rem 0 0.5rem; */
 }

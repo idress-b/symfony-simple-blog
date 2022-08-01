@@ -57,23 +57,43 @@ class PostRepository extends ServiceEntityRepository
             )
             ;
     }
-    // /**
-    //  * @return Post[] Returns an array of Post objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+     * @return Post[] Returns an array of Post objects
+     */
+    
+    public function findPostsWithCommentsAndTags()
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('p.isPublished = :value')
+            ->setParameter('value',true) 
+            ->orderBy('p.publishedAt','DESC')
+            ->leftjoin('p.comments','c')
+            ->addSelect('c')
+            ->leftjoin('p.tags','t')
+            ->addSelect('t')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
+    
+       /**
+        * @return Post[] Returns an array of Tag objects
+        */
+   public function findPostsByTag($value): array
+   {
+       return $this->createQueryBuilder('p')
+           ->andWhere('p.isPublished = :value')
+           ->setParameter('value',true)
+           ->leftjoin('p.tags','t')
+           ->addSelect('t')
+           ->andWhere('t.id = :val')
+           ->setParameter('val', $value)
+           ->orderBy('p.publishedAt', 'DESC')
+           
+           ->getQuery()
+           ->getResult()
+       ;
+   }
     /*
     public function findOneBySomeField($value): ?Post
     {
@@ -85,4 +105,5 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }

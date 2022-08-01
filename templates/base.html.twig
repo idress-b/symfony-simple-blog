@@ -1,122 +1,166 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="Projet fictif - Site collaboratif pour tout savoir sur le métier de développeur">
-		<meta name="author" content="Idress Benchellali">
-		<title>
-			{% block title %}Bienvenue chez objectif développeur
-			{% endblock %}
-		</title>
-		<link
-		rel="icon" href="{{ asset('img/favicon.ico') }}">
-		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-		<script defer src="{{ asset('js/main.js') }}"></script>
-		{% block stylesheets %}{% endblock %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Projet fictif - Site collaboratif pour tout savoir sur le métier de développeur"
+    />
+    <meta name="author" content="Idress Benchellali" />
+    <title>
+      {% block title %}Bienvenue chez objectif développeur {% endblock %}
+    </title>
+    <link rel="icon" href="{{ asset('img/favicon.ico') }}" />
+    {# Run `composer require symfony/webpack-encore-bundle` to start using
+    Symfony UX #}
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+      integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <script defer src="{{ asset('js/main.js') }}"></script>
+    {% block stylesheets %}{% endblock %}
+  </head>
 
-	</head>
+  <body>
+    <header>
+      <nav
+        class="navbar navbar-expand-md navbar-dark bg-dark"
+        aria-label="Third navbar example"
+      >
+        <div class="container-lg">
+          <a class="navbar-brand" href="{{ path('index') }}"
+            ><img
+              src="{{ asset('img/logo_clair_200.png') }}"
+              alt="logo du site"
+          /></a>
 
-	<body>
-		<header>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+              <li class="nav-item mx-lg-5 mx-md-0">
+                <a class="nav-link" href="{{ path('index') }}">Accueil</a>
+              </li>
+              <li class="nav-item mx-lg-5 mx-md-3">
+                <a class="nav-link" href="">A propos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
+              </li>
+			</ul>
+              {% if app.user %}
 
-			<nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Third navbar example">
-				<div class="container">
+              <div class="dropdown">
+                <a
+                  class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                  href="#"
+                  role="button"
+                  id="dropdownMenuLink"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="{{ app.user.getAvatarUrl }}"
+                    alt="hugenerd"
+                    width="40"
+                    height="40"
+                    class="me-2 rounded-circle"
+                  />
+                  {{ app.user }}
+                </a>
 
-					<a class="navbar-brand" href="{{ path('index') }}"><img src="{{ asset('img/logo_clair_200.png') }}" alt="logo du site"></a>
-					<!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-																					<span class="navbar-toggler-icon"></span>
-																				</button> -->
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarNavDropdown">
-						<ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  {% if is_granted("ROLE_ADMIN") %}
+                  <li>
+                    <a class="dropdown-item" href="{{ path('admin') }}"
+                      >Dashboard administrateur</a
+                    >
+                  </li>
+                  {% endif %}
+                  <li>
+                    <a class="dropdown-item" href="{{ path('account_index') }}"
+                      >profil</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{{ path('app_logout') }}"
+                      >Déconnexion</a
+                    >
+                  </li>
+                </ul>
+              </div>
 
+              {% else %}
+             
+                <li class="nav-item ms-auto">
+                  <a class="nav-item text-decoration-none text-white me-md-2" href="{{ path('app_login') }}"
+                    >Connexion</a
+                  >
+                
+                  <a
+                    class="btn btn-outline-primary"
+                    href="{{ path('app_register') }}"
+                    >Créer un compte</a
+                  >
+                </li>
+             
 
-							<li class="nav-item mx-lg-5 mx-md-3">
-								<a class="nav-link" href="{{ path('index') }}">Accueil</a>
-							</li>
-							<li class="nav-item mx-lg-5 mx-md-3">
-								<a class="nav-link" href="">A propos</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
-							</li>
+              {% endif %}
+            
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      {{ include("layout/partials/flash_messages.html.twig") }}
+      {% block body %}{% endblock %}
+    </main>
+    <footer class="footer mt-5 pt-4 text-center">
+      <div class="footer-nav my-3 text-lg-center text-start">
+        <ul class="mx-md-auto">
+          <li class="d-md-inline-block">
+            <a href="">MENTIONS LEGALES</a>
+          </li>
+          <li class="d-md-inline-block">
+            <a href="">POLITIQUE DE CONFIDENTIALITE</a>
+          </li>
+          <li class="d-md-inline-block">
+            <a href="{{ path('app_contact') }}">PAGE DE CONTACT</a>
+          </li>
+          <li class="d-md-inline-block">
+            <a href="">SUGGERER UN ARTICLE</a>
+          </li>
+        </ul>
+      </div>
+      <p class="p-2">Tous droits réservés © 2022, Objectif développeur</p>
+    </footer>
 
-						</ul>
-						{% if app.user %}
-
-							<div class="dropdown">
-								<a class=" d-flex align-items-center text-white text-decoration-none dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-									<img src="{{ app.user.getAvatarUrl }}" alt="hugenerd" width="40" height="40" class="me-2 rounded-circle">
-									{{ app.user}}
-								</a>
-
-								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-									{% if is_granted("ROLE_ADMIN") %}
-									<li>
-										<a class="dropdown-item" href="{{ path('admin') }}">Dashboard administrateur</a>
-									</li>
-									{%  endif %}
-									<li>
-										<a class="dropdown-item" href="{{ path('account_index') }}">profil</a>
-									</li>
-									<li>
-										<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
-									</li>
-
-								</ul>
-							</div>
-
-
-						{% else %}
-
-
-							<a class="nav-link mx-lg-5 mx-md-3" href="{{ path('app_login') }}">Connexion</a>
-
-
-						{% endif %}
-
-
-					</div>
-				</div>
-			</nav>
-
-		</header>
-		<main>
-			{% block body %}{% endblock %}
-		</main>
-		<footer class="footer mt-5 pt-4 text-center">
-
-
-			<div class="footer-nav my-3 text-lg-center text-start">
-				<ul class="mx-md-auto">
-					<li class="d-md-inline-block">
-						<a href="">MENTIONS LEGALES</a>
-					</li>
-					<li class="d-md-inline-block">
-						<a href="">POLITIQUE DE CONFIDENTIALITE</a>
-					</li>
-					<li class="d-md-inline-block">
-						<a href="{{ path('app_contact') }}">PAGE DE CONTACT</a>
-					</li>
-					<li class="d-md-inline-block">
-						<a href="">SUGGERER UN ARTICLE</a>
-					</li>
-				</ul>
-
-			</div>
-			<p class="p-2">Tous droits réservés © 2022, Objectif développeur</p>
-
-
-		</footer>
-
-		{% block javascripts  %}{% endblock %}
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-	</body>
+    {% block javascripts %}{% endblock %}
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

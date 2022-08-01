@@ -11,6 +11,8 @@
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">Titre</th>
+					<th scope="col">Catégorie</th>
+					<th scope="col">Tags</th>
 					<th scope="col">image</th>
 					<th scope="col">extrait</th>
 					<th scope="col">action</th>
@@ -21,7 +23,14 @@
 					<tr>
 						<th scope="row">{{ post.id }}</th>
 						<td>{{ post.title }}</td>
-						<td><img src="{{ post.getImageUrl }}" alt="" width="100"></td>
+						<td>{{ post.category }}</td>
+						<td>
+							{% for tag in post.tags %}
+						 <span	class="hashtag badge bg-primary">{{ tag }}</span>
+							{% endfor %}
+
+						</td>
+						<td><img src="{{ post.getImageUrl }}" alt="" width="80"></td>
 						<td>{{ post.content| slice(0,200) |raw  }}</td>
 						<td>
 							<a href="{{ path('blog_read',{'id': post.id}) }}">Voir

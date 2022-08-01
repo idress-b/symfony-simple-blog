@@ -76,7 +76,11 @@
 						</div>
 					</div>
 				</div>
-				<div class="col py-3"> {% block body %}{% endblock %}
+				<div class="col py-3">
+					
+					{{ include('layout/partials/flash_messages.html.twig')}}
+					
+					{% block body %}{% endblock %}
 					</div>
 				</div>
 			</div>
