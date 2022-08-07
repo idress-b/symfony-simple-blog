@@ -1,0 +1,14 @@
+
+{{form_start(form) }}
+{{ form_row(form.title) }}
+{{ form_row(form.category)}}
+{{ form_row(form.tags) }}
+<img width="500" src="" id="file-preview" alt="">
+{{ form_row(form.file) }}
+
+<p>Corps de l'article</p>
+<div id="editor"></div>
+
+<button type="submit" class="btn btn-primary mt-3">{{ buttonName }}</button>
+
+{{ form_end(form) }}
