@@ -11,7 +11,7 @@ app.request.get('page') == null %}
 			</div>
 		</div>
 
-		
+
 	{% endif %}
 
 
@@ -28,17 +28,13 @@ app.request.get('page') == null %}
 							<div class="m-3 ">
 								<article class="article-grid mx-xl-4">
 									<div class="custom-card">
-
 										<div class="d-flex align-items-center">
 											<img class='rounded-circle m-2' width="32" heigh='32' src="{{ post.author.getAvatarUrl }}" alt="{{post.author}}">
-
-											<small> écrit par
-												<strong>
-													{{ post.author.pseudo }}</strong>
-												 le
+											<small>écrit par
+												<strong>{{ post.author.pseudo }}</strong>
+												le
 												{{ post.publishedAt | date('d/m/Y')}}
 											</small>
-
 										</div>
 										<div class="d-flex flex-column-reverse flex-lg-row">
 											<div class="flex-grow-1">
@@ -48,11 +44,13 @@ app.request.get('page') == null %}
 													</h2>
 
 													{% for tag in post.tags %}
-						 <a class="text-decoration-none text-dark" href="{{path("app_tag",{id: tag.id})}}"><span	class="hashtag">{{ tag }}</span></a>
-							{% endfor %}
+														<a class="text-decoration-none text-dark" href="{{path("app_tag",{id: tag.id})}}">
+															<span class="hashtag">{{ tag }}</span>
+														</a>
+													{% endfor %}
+
 													<p class="card-text pb-0">{{ post.content| slice(0,200) |raw  }}...</p>
 													<p>
-
 														<small>{{ post.validComments | length }}
 															Commentaires</small>
 													</p>
