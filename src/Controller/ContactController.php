@@ -36,6 +36,7 @@ class ContactController extends AbstractController
 
             try {
                 $mailer->send($email);
+                return $this->redirectToRoute('thank_you');
             } catch (TransportExceptionInterface $e) {
                 dd('probleme ' . $e);
             }
@@ -46,5 +47,13 @@ class ContactController extends AbstractController
         return $this->render('contact/contact.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/merci", name="thank_you")
+     */
+    public function thanks(): Response
+    {
+        return $this->render('contact/thank_you.html.twig');
     }
 }
