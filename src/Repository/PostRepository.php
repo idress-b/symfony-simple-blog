@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Post;
+use App\Classe\Search;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -46,54 +47,65 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-    public function getPaginatedPosts(int $page, int $limit):Paginator
+    public function getPaginatedPosts(int $page, int $limit): Paginator
     {
         return new Paginator(
             $this->createQueryBuilder('p')
-            ->addSelect('c')
-                ->join('p.comments','c')
-            ->setMaxResults($limit)
-            ->setFirstResult(($page - 1) * $limit)
-            )
-            ;
+                ->addSelect('c')
+                ->join('p.comments', 'c')
+                ->setMaxResults($limit)
+                ->setFirstResult(($page - 1) * $limit)
+        );
     }
-     /**
+    /**
      * @return Post[] Returns an array of Post objects
      */
-    
+
     public function findPostsWithCommentsAndTags()
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.isPublished = :value')
-            ->setParameter('value',true) 
-            ->orderBy('p.publishedAt','DESC')
-            ->leftjoin('p.comments','c')
+            ->setParameter('value', true)
+            ->orderBy('p.publishedAt', 'DESC')
+            ->leftjoin('p.comments', 'c')
             ->addSelect('c')
-            ->leftjoin('p.tags','t')
+            ->leftjoin('p.tags', 't')
             ->addSelect('t')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    
-       /**
-        * @return Post[] Returns an array of Tag objects
-        */
-   public function findPostsByTag($value): array
-   {
-       return $this->createQueryBuilder('p')
-           ->andWhere('p.isPublished = :value')
-           ->setParameter('value',true)
-           ->leftjoin('p.tags','t')
-           ->addSelect('t')
-           ->andWhere('t.id = :val')
-           ->setParameter('val', $value)
-           ->orderBy('p.publishedAt', 'DESC')
-           
-           ->getQuery()
-           ->getResult()
-       ;
-   }
+
+    /**
+     * @return Post[] Returns an array of Tag objects
+     */
+    public function findPostsByTag($value): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.isPublished = :value')
+            ->setParameter('value', true)
+            ->leftjoin('p.tags', 't')
+            ->addSelect('t')
+            ->andWhere('t.id = :val')
+            ->setParameter('val', $value)
+            ->orderBy('p.publishedAt', 'DESC')
+
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findWithSearch(Search $search)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.title LIKE :val')
+            ->orWhere('p.content LIKE :val')
+            ->setParameter('val', "%{$search->string}%")
+            ->orderBy('p.publishedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
     /*
     public function findOneBySomeField($value): ?Post
     {
@@ -105,5 +117,4 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
     */
-
 }

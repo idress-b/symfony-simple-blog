@@ -116,16 +116,12 @@ div.right-sidebar img {
 /************************************************ page d'accueil ****************************************************/
 
 .article-grid{
-    /* box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px; */
+  
     border: 1px solid rgb(217, 217, 217);
     border-radius:5px;
     background-color: white;
 }
-/* 
-.article-grid:hover {
-     box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px; 
-}
- */
+
 
 .article-grid{
     cursor:pointer;
@@ -139,8 +135,6 @@ div.right-sidebar img {
 .footer-nav{
     display:block;
 
- /*   align-items: center;
-    justify-content: center; */
 }
 .footer-nav ul{
     list-style: none;
@@ -240,7 +234,7 @@ display:none;
 .ck-editor__editable_inline {
     min-height: 400px;
 }
-
+/******************************* hashtag *****************************/
 .hashtag{
     padding:0.2rem 0.5rem 0 0.5rem;
 }

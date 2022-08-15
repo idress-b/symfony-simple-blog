@@ -21,24 +21,24 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-       //return parent::index();
-      //  return $this->render('account/contact.html.twig', [
-       //     'dashboard_controller_filepath' => (new \ReflectionClass(static::class))->getFileName(),
-       //     'dashboard_controller_class' => (new \ReflectionClass(static::class))->getShortName(),
-       // ]);
+        //return parent::index();
+        //  return $this->render('account/contact.html.twig', [
+        //     'dashboard_controller_filepath' => (new \ReflectionClass(static::class))->getFileName(),
+        //     'dashboard_controller_class' => (new \ReflectionClass(static::class))->getShortName(),
+        // ]);
         return $this->render('admin/index.html.twig');
     }
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Projet Blog');
+            ->setTitle('Objectif développeur');
     }
 
     public function configureMenuItems(): iterable
     {
 
-        yield MenuItem::linkToUrl('Aller sur le site', 'fa fa-home',$this->generateUrl('index'));
+        yield MenuItem::linkToUrl('Aller sur le site', 'fa fa-home', $this->generateUrl('index'));
         yield MenuItem::linkToDashboard('Accueil  ', 'fas fa-chalkboard-teacher');
         yield MenuItem::linkToCrud('Auteurs', 'fas fa-user', User::class)
             ->setPermission('ROLE_ADMIN');
@@ -54,12 +54,9 @@ class DashboardController extends AbstractDashboardController
         return parent::configureUserMenu($user)
             ->addMenuItems([
                 MenuItem::linkToRoute('Mon profil', 'fa fa-id-card', 'account_index', ['controller_name' => 'AccountController']),
-              //  MenuItem::linkToRoute('Settings', 'fa fa-user-cog', '...', ['...' => '...']),
+                //  MenuItem::linkToRoute('Settings', 'fa fa-user-cog', '...', ['...' => '...']),
                 MenuItem::section(),
-             //   MenuItem::linkToLogout('Logout', 'fa fa-sign-out'),
-            ]);
-            ;
+                //   MenuItem::linkToLogout('Logout', 'fa fa-sign-out'),
+            ]);;
     }
-
-
 }

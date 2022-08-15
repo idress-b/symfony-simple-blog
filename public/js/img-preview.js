@@ -14,6 +14,4 @@ document.addEventListener("DOMContentLoaded", () => {
   if (postFile) {
     postFile.addEventListener("change", showPreview);
   }
-
- 
 });

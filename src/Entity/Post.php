@@ -83,7 +83,7 @@ class Post
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isPublished = false;
+    private $isPublished = true;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts")
@@ -210,7 +210,7 @@ class Post
 
     public function getImageUrl(): string
     {
-        return "https://objectif-developpeur.s3.eu-west-3.amazonaws.com/".$this->image;
+        return "https://objectif-developpeur.s3.eu-west-3.amazonaws.com/" . $this->image;
     }
 
     public function getCategory(): ?Category

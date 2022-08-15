@@ -21,7 +21,7 @@ app.request.get('page') == null %}
 				{% if app.request.get('page') == 1 or
 app.request.get('page') == null %}
 
-					<h3 class="text-center my-4">Nos derniers articles</h3>
+					<h3 class="ms-5 my-4">{{ heading }}</h3>
 					{% endif%}
 					{% for post in posts %}
 						<a class="link-neutral" href="{{ path('blog_read', { id: post.id }) }}">
@@ -71,7 +71,18 @@ app.request.get('page') == null %}
 					{{ knp_pagination_render(posts) }}
 				</div>
 				<div class="d-none d-lg-block col-lg-3 right-sidebar mt-3">
-					<img class="img-fluid w-100 rounded-2 " src="img/job_board.jpg" alt="offres d'emploi">
+					<div>
+						<img class="img-fluid w-100 rounded-2 " src="img/job_board.jpg" alt="offres d'emploi">
+					</div>
+					<div class="mt-4">
+						{{ form_start(form) }}
+
+						{{ form_row(form.string) }}
+
+						<button type="submit" class="btn btn-primary">Recherche</button>
+						{{ form_end(form) }}
+
+					</div>
 				</div>
 			</div>
 		</div>
