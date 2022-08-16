@@ -17,12 +17,12 @@ app.request.get('page') == null %}
 
 	<div class="container">
 		<div class="row mt-4">
-			<div class="col-12 col-lg-9">
-				{% if app.request.get('page') == 1 or
+			{% if app.request.get('page') == 1 or
 app.request.get('page') == null %}
 
-					<h3 class="ms-5 my-4">{{ heading }}</h3>
-					{% endif%}
+				<h3 class="ms-5 my-4">{{ heading }}</h3>
+				{% endif%}
+				<div class=" order-1 order-lg-0 col-12 col-lg-9">
 					{% for post in posts %}
 						<a class="link-neutral" href="{{ path('blog_read', { id: post.id }) }}">
 							<div class="m-3 ">
@@ -70,18 +70,20 @@ app.request.get('page') == null %}
 					{% endfor %}
 					{{ knp_pagination_render(posts) }}
 				</div>
-				<div class="d-none d-lg-block col-lg-3 right-sidebar mt-3">
-					<div>
-						<img class="img-fluid w-100 rounded-2 " src="img/job_board.jpg" alt="offres d'emploi">
-					</div>
-					<div class="mt-4">
-						{{ form_start(form) }}
+				<div class=" order-0 order-lg-1 col-lg-3 right-sidebar mt-3">
+					<div class="sticky-container">
+						<div class="mb-4 mx-3 mx-lg-0 p-3 border  bg-white rounded-2">
+							{{ form_start(form) }}
 
-						{{ form_row(form.string) }}
+							{{ form_row(form.string) }}
 
-						<button type="submit" class="btn btn-primary">Recherche</button>
-						{{ form_end(form) }}
+							<button type="submit" class="btn btn-primary w-100">Recherche</button>
+							{{ form_end(form) }}
 
+						</div>
+						<div class="d-none d-lg-block">
+							<img class="img-fluid w-100 rounded-2 " src="img/job_board.jpg" alt="offres d'emploi">
+						</div>
 					</div>
 				</div>
 			</div>

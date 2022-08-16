@@ -32,10 +32,14 @@ class BlogController extends AbstractController
         $search = new Search;
         $form = $this->createForm(SearchType::class, $search)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($search->string != '') {
+            if ($search->string) {
 
                 $donnees = $repository->findWithSearch($search);
-                $heading = 'Résultats de recherche pour "' . $search->string . '"';
+                if ($donnees) {
+                    $heading = 'Résultats de recherche pour "' . $search->string . '"';
+                } else {
+                    $heading = 'Aucun résultat pour "' . $search->string . '"';
+                }
             }
         }
 

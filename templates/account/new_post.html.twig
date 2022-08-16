@@ -2,30 +2,31 @@
 
 {% block content_title 'Nouvel article' %}
 {% block style %}
-<link rel="stylesheet" href="{{ asset('css/ckeditor.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/ckeditor.css') }}">
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1 class="my-5">Nouvel article</h1>
-        {{form_start(form) }}
-        {{ form_row(form.title) }}
-        {{ form_row(form.category)}}
-        <img width="500" src="" id="file-preview" alt="">
-        {{ form_row(form.file) }}
-        {# {{ form_row(form.content) }} #}
-        <p>Corps de l'article</p>
-        <div id="editor"></div>
-       
-        <button type="submit" class="btn ntn-lg btn-primary mt-4">Publier</button>
-        {{ form_end(form) }}
+	<div class="container">
+		<h1 class="my-5">Nouvel article</h1>
+		{{form_start(form) }}
+		{{ form_row(form.title) }}
+		{{ form_row(form.category)}}
+		{{ form_row(form.tags) }}
+		<img width="500" src="" id="file-preview" alt="">
+		{{ form_row(form.file) }}
+		{# {{ form_row(form.content) }} #}
+		<p>Corps de l'article</p>
+		<div id="editor"></div>
+
+		<button type="submit" class="btn ntn-lg btn-primary mt-4">Publier</button>
+		{{ form_end(form) }}
 
 
-    </div>
+	</div>
 
 {% endblock %}
 {% block javascript %}
-<script src="{{ asset('js/img-preview.js') }}"></script>
-<script src="{{ asset('ckeditor5/ckeditor.js')}}"></script>
-<script src="{{ asset('js/ckeditor_init.js')}}"></script>
+	<script src="{{ asset('js/img-preview.js') }}"></script>
+	<script src="{{ asset('ckeditor5/ckeditor.js')}}"></script>
+	<script src="{{ asset('js/ckeditor_init.js')}}"></script>
 {% endblock %}
