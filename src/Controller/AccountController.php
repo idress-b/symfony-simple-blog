@@ -35,10 +35,10 @@ class AccountController extends AbstractController
     public function ShowPosts(PostRepository $repository, Request $request, PaginatorInterface $paginator): Response
     {
         $user = $this->getUser();
-       
 
-             $donnees = $repository->findBy(['author' => $user], ['publishedAt' => 'desc']);
-         
+
+        $donnees = $repository->findBy(['author' => $user], ['publishedAt' => 'desc']);
+
 
         $posts = $paginator->paginate(
             $donnees, // Requête contenant les données à paginer (ici nos articles)
@@ -76,7 +76,7 @@ class AccountController extends AbstractController
             $em->persist($post);
             $em->flush();
 
-            $this->addFlash('success','Article créé avec succès');
+            $this->addFlash('success', 'Article créé avec succès');
 
             return $this->redirectToRoute("account_show_posts");
         }
@@ -98,7 +98,7 @@ class AccountController extends AbstractController
     ) {
         // on recupère les infos de l'image en base de données 
         $tempImg = $post->getImage();
-       
+
         $form = $this->createForm(PostType::class, $post)
             ->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -117,7 +117,7 @@ class AccountController extends AbstractController
 
             $em->flush();
 
-            $this->addFlash('success','Article modifié avec succès');
+            $this->addFlash('success', 'Article modifié avec succès');
 
             return $this->redirectToRoute("account_show_posts");
         }
@@ -138,12 +138,17 @@ class AccountController extends AbstractController
         Post $post,
         FileUploader $fileUploader
     ) {
-        $ImageFile = $post->getImage();
+        $imageFile = $post->getImage();
+        if ($imageFile) {
 
-        $fileUploader->deleteFile($ImageFile);
-       
+            $fileUploader->deleteFile($imageFile);
+        }
+
+
         $postRepository->remove($post);
         $em->flush();
+
+        $this->addFlash('success', 'Article supprimé avec succès');
         // 4 : redirect to route index
         return $this->redirectToRoute('account_show_posts');
     }
