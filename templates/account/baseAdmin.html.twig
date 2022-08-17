@@ -28,34 +28,34 @@
 		<div class="container-fluid">
 			<div class="row flex-nowrap">
 				<div class="col-auto  col-xl-2 px-sm-2 px-0 bg-dark min-vh-100 admin-sidebar">
-					<div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 position-fixed">
+					<div class="d-flex flex-column align-items-center px-3 pt-2 text-white min-vh-100 position-fixed">
 						<img width="140" class=" d-md-inline mb-5 img-fluid border-bottom pb-3" src="{{ asset('img/logo_clair_200.png') }}" alt="logo">
 
-						<ul class="nav nav-admin nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-md-start" id="menu">
+						<ul class="nav nav-admin nav-pills flex-column mb-sm-auto mb-0  align-items-start" id="menu">
 							<li class="nav-item">
 								<a href="{{ path('index') }}" class="nav-link align-middle px-0 text-white">
 									<i class="fa-solid fa-house"></i>
-									<span class="ms-2 d-none d-md-inline">Home</span>
+									<span class="ms-2 ">Home</span>
 								</a>
 							</li>
 
 							<li>
 								<a href="{{ path('profil') }}" class="nav-link px-0 align-middle text-white">
 									<i class="fa-regular fa-user"></i>
-									<span class="ms-1 d-none d-md-inline">Profil</span>
+									<span class="ms-1 ">Profil</span>
 								</a>
 							</li>
 
 							<li>
-								<a href="{{ path('account_show_posts') }}" class="nav-link px-0 align-middle text-white">
+								<a href="{{ path('account_show_posts') }}" class="nav-link px-0  text-white">
 									<i class="fa-solid fa-pen-nib"></i>
-									<span class="ms-1 d-none d-md-inline">Liste des articles</span>
+									<span class="ms-1 ">Liste des articles</span>
 								</a>
 							</li>
 							<li>
-								<a href="{{ path('account_new_post') }}" class=" align-middle btn btn-primary my-2">
+								<a href="{{ path('account_new_post') }}" class=" btn btn-primary my-2">
 									<i class="fa-solid fa-plus"></i>
-									<span class="ms-1 d-none d-md-inline">Nouvel article</span>
+									<span class="ms-1 ">Nouvel article</span>
 								</a>
 							</li>
 
