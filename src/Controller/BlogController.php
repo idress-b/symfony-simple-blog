@@ -8,6 +8,7 @@ use App\Entity\Post;
 use App\Form\CommentType;
 use App\Form\SearchType;
 use App\Repository\PostRepository;
+use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,11 +21,11 @@ class BlogController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(Request $request, PostRepository $repository, PaginatorInterface $paginator): Response
+    public function index(Request $request, PostRepository $repository, PaginatorInterface $paginator, TagRepository $tagRepository): Response
     {
 
         // je donne un titre au heading 
-        $heading = "nos derniers articles";
+        $heading = "Nos derniers articles";
         // $donnees = $repository->findBy([], ['publishedAt' => 'desc']);
         $donnees = $repository->findPostsWithCommentsAndTags();
 
@@ -49,10 +50,14 @@ class BlogController extends AbstractController
             6 // Nombre de résultats par page
         );
 
+        // par ailleurs je récupère les tags 
+        $tags = $tagRepository->findBy(array(), null, 30);
+
         return $this->render('blog/index.html.twig', [
             'posts' => $posts,
             'form' => $form->createView(),
-            'heading' => $heading
+            'heading' => $heading,
+            'tags' => $tags
         ]);
     }
 

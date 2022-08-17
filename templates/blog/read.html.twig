@@ -4,46 +4,71 @@
 
 		<h1 class="mt-5 mb-3 text-center">{{ post.title }}</h1>
 
-		<p class="text-center mb-2">{{ post.publishedAt | date("d/m/Y") }}
-			/{{ post.validComments|length}}
-			Commentaires /
-			{{ post.author.pseudo }}</p>
+
+		<p class="text-center mb-2">
+			rédigé par
+			{{ post.author.pseudo }}
+			le
+			{{ post.publishedAt | date("d/m/Y") }}</p>
 		<div class="text-center mb-5 ">
 			<img width="650" class="img-fluid" src="{{ post.getImageUrl }}" alt=""><br>
 		</div>
 
 		<p>{{ post.content |raw }}</p>
+		<!------------------- a propos del'auteur --------------------------------->
+		<hr>
+		<article class="mb-3 ">
+			<p class="fs-3 mt-2 fw-bold">A propos de l'auteur</p>
+			<div class="row">
+				<div class="col-auto ">
+					<img src="{{ post.author.getAvatarUrl }}" alt="auteur" width="120" class="me-2 rounded-circle"/>
+				</div>
+				<div class="col border-left border-2">
+					<p class="fw-bold fs-4">
+						{{post.author.pseudo}}
+					</p>
+					<p class="fs-5 fst-italic">
+						{{ post.author.bio}}
+					</p>
+				</div>
+			</div>
+		</article>
+		<hr>
 
 		<!---------------------------------- Listes des commentaires approuvés --------------------->
-		<div class="comment-list">
+		{% if post.validComments|length > 0 %}
+			<p class="fs-3 mt-2 ">Commentaires
+			</p>
+			<div class="comment-list">
 
-			{% for comment in post.validComments %}
-				<article>
-					<li class="py-3">
-						<div class="row">
-							<div class="col-1">
+				{% for comment in post.validComments %}
+					<article>
+						<li class="py-3">
+							<div class="row">
+								<div class="col-1">
 
 
-								<i class="fa-solid fa-circle-user fs-2"></i>
+									<i class="fa-solid fa-circle-user fs-2"></i>
+								</div>
+								<div class="col-11">
+									<p class="fw-bold">{{ comment.author }}
+										<!--<span class="d-inline-block reply "><strong>Répondre</strong></span> -->
+										<br>
+										<small class="fw-light text-muted">
+											Le
+											{{ comment.postedAt | date("d/m/Y") }}</small>
+									</p>
+									<p class="">{{ comment.content }}</p>
+								</div>
 							</div>
-							<div class="col-11">
-								<p class="fw-bold">{{ comment.author }}
-									<!--<span class="d-inline-block reply "><strong>Répondre</strong></span> -->
-									<br>
-									<small class="fw-light text-muted">
-										Le
-										{{ comment.postedAt | date("d/m/Y") }}</small>
-								</p>
-								<p class="">{{ comment.content }}</p>
-							</div>
-						</div>
-					</li>
-				</article>
+						</li>
+					</article>
 
 
-			{% endfor %}
+				{% endfor %}
 
-		</div>
+			</div>
+		{% endif %}
 		<!-----------      Formulaire de soumission de commentaires ----------------------------------------------------------------- -->
 		<div class="form-comment-group p-md-4 p-2 border-md-5 mt-2 ">
 

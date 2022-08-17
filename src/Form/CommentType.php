@@ -15,22 +15,14 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('author',TextType::class, [
-                "label"=>"pseudo  ",
-                'constraints'=>new Length([
-        'min'=>2,
-        'max'=>30
-    ])
-            ])
-            ->add('content',TextareaType::class,[
-                'label' => 'Votre commentaire:',
-                'constraints'=>new Length([
-                    'min'=>2,
-                    'max'=>250
-                ])
-            ])
+            ->add('author', TextType::class, [
+                "label" => "pseudo  ",
 
-        ;
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Votre commentaire:',
+
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

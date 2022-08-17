@@ -1,20 +1,67 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello TagController!{% endblock %}
-
+{% block title %}Objectif Développeur | votre recherche
+{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Bob/Documents/APPRENTISSAGE1/SYMFONY/blog-objectif/symfony-simple-blog/src/Controller/TagController.php'|file_link(0) }}">src/Controller/TagController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Bob/Documents/APPRENTISSAGE1/SYMFONY/blog-objectif/symfony-simple-blog/templates/tag/index.html.twig'|file_link(0) }}">templates/tag/index.html.twig</a></code></li>
-    </ul>
-</div>
+	<div class="container">
+		<div class="row mt-4">
+			{% if app.request.get('page') == 1 or
+app.request.get('page') == null %}
+
+				<h1 class="ms-5 my-4 h3">Articles contenant le tag "{{ tag.name }}"</h1>
+				{% endif%}
+				<div class=" order-1 order-lg-0 col-12 col-lg-9">
+					{% for post in posts %}
+						<a class="link-neutral" href="{{ path('blog_read', { id: post.id }) }}">
+							<div class="m-3 ">
+								<article class="article-grid mx-xl-4">
+									<div class="custom-card">
+										<div class="d-flex align-items-center">
+											<img class='rounded-circle m-2' width="32" heigh='32' src="{{ post.author.getAvatarUrl }}" alt="{{post.author}}">
+											<small>écrit par
+												<strong>{{ post.author.pseudo }}</strong>
+												le
+												{{ post.publishedAt | date('d/m/Y')}}
+											</small>
+										</div>
+										<div class="d-flex flex-column-reverse flex-lg-row">
+											<div class="flex-grow-1">
+												<div class="px-3">
+													<h2 class="card-title mt-2 fs-4">
+														<b>{{ post.title }}</b>
+													</h2>
+
+													{% for tag in post.tags %}
+														<a class="text-decoration-none text-dark" href="{{path("app_tag",{id: tag.id})}}">
+															<span class="hashtag">{{ tag }}</span>
+														</a>
+													{% endfor %}
+
+													<p class="card-text pb-0">{{ post.content| slice(0,200) |raw  }}...</p>
+													<p>
+														<small>{{ post.validComments | length }}
+															Commentaires</small>
+													</p>
+												</div>
+
+											</div>
+											<div class="align-self-center me-3 pb-3">
+												{% if post.image%}
+													<img src="{{ post.getImageUrl }}" width="180" class=" img-fluid" alt="..."/>
+												{% endif %}
+											</div>
+										</div>
+									</div>
+								</article>
+							</div>
+						</a>
+					{% endfor %}
+					{{ knp_pagination_render(posts) }}
+				</div>
+				<div class=" order-0 order-lg-1 col-lg-3 right-sidebar mt-3"></div>
+			</div>
+		</div>
+	</div>
+
 {% endblock %}

@@ -20,7 +20,7 @@ app.request.get('page') == null %}
 			{% if app.request.get('page') == 1 or
 app.request.get('page') == null %}
 
-				<h3 class="ms-5 my-4">{{ heading }}</h3>
+				<h1 class="ms-5 my-4 h3">{{ heading }}</h1>
 				{% endif%}
 				<div class=" order-1 order-lg-0 col-12 col-lg-9">
 					{% for post in posts %}
@@ -71,7 +71,9 @@ app.request.get('page') == null %}
 					{{ knp_pagination_render(posts) }}
 				</div>
 				<div class=" order-0 order-lg-1 col-lg-3 right-sidebar mt-3">
-					<div class="sticky-container">
+					<div
+						class="sticky-container">
+						<!--------------------- Formulaire de recherche   ------------------------------->
 						<div class="mb-4 mx-3 mx-lg-0 p-3 border  bg-white rounded-2">
 							{{ form_start(form) }}
 
@@ -81,12 +83,23 @@ app.request.get('page') == null %}
 							{{ form_end(form) }}
 
 						</div>
-						<div class="d-none d-lg-block">
-							<img class="img-fluid w-100 rounded-2 " src="img/job_board.jpg" alt="offres d'emploi">
-						</div>
+						<!--------------------- Tags populaires  ------------------------------->
+						<div class="mb-4 mx-3 mx-lg-0 p-3 border  bg-white rounded-2">
+							<p class="fw-bold">Tags populaires</p><hr>
+							{% for tag in tags %}
+								<a class="text-decoration-none text-dark" href="{{path("app_tag",{id: tag.id})}}">
+									<span class="hashtag">{{tag}}</span>
+								</a>
+							{% endfor %}
+						</p>
+					</div>
+
+					<div class="d-none d-lg-block">
+						<img class="img-fluid w-100 rounded-2 " src="img/job_board.jpg" alt="offres d'emploi">
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-	{% endblock %}
+{% endblock %}

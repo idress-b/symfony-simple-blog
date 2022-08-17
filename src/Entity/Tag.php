@@ -25,7 +25,7 @@ class Tag
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=post::class, inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity=Post::class, inversedBy="tags")
      */
     private $post;
 
