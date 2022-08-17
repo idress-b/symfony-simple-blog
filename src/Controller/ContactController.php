@@ -26,12 +26,12 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $email = (new Email())
                 ->from($contact->get('email')->getData())
-                ->to('monsite@example.com')
+                ->to('contact@objectfi-developpeur.com')
                 //->cc('cc@example.com')
                 //->bcc('bcc@example.com')
                 //->replyTo('fabien@example.com')
                 //->priority(Email::PRIORITY_HIGH)
-                ->subject('Message depuis le formulaire de contact de la part de ' . $contact->get('name')->getData())
+                ->subject('Message envoyé depuis le site Objectif Développeur par ' . $contact->get('name')->getData())
                 ->text($contact->get('message')->getData());
 
             try {

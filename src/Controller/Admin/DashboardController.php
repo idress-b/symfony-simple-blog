@@ -42,10 +42,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Accueil  ', 'fas fa-chalkboard-teacher');
         yield MenuItem::linkToCrud('Auteurs', 'fas fa-user', User::class)
             ->setPermission('ROLE_ADMIN');
-        yield MenuItem::linkToCrud('Articles', 'fas fa-user', Post::class);
-        yield MenuItem::linkToCrud('Commentaires', 'fas fa-user', Comment::class)
+        yield MenuItem::linkToCrud('Articles', 'fas fa-file-alt', Post::class);
+        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Comment::class)
             ->setPermission('ROLE_ADMIN');
-        yield MenuItem::linkToCrud('Categories', 'fas fa-user', Category::class)
+        yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class)
             ->setPermission('ROLE_ADMIN');
     }
 

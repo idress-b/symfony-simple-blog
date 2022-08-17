@@ -21,19 +21,21 @@ use App\Form\dataTransformer\TagsDataTransformer;
 
 class PostType extends AbstractType
 {
-   public function __construct(private TagsDataTransformer $transformer){} 
-   
+    public function __construct(private TagsDataTransformer $transformer)
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('title', TextType::class, ['label' => 'Titre'])
-            ->add('category',EntityType::class,[
-                'label'=>'choisir la catégorie',
-                'required'=>true,
-                'class'=>Category::class,
-              
+            ->add('category', EntityType::class, [
+                'label' => 'choisir la catégorie',
+                'required' => true,
+                'class' => Category::class,
+
             ])
-            ->add('content',HiddenType::class)
+            ->add('content', HiddenType::class)
             ->add("file", FileType::class, [
                 "required" => false,
                 "label" => "Image de couverture",
@@ -44,10 +46,12 @@ class PostType extends AbstractType
 
                 ]
             ])
-            ->add('tags',TextType::class);
+            ->add('tags', TextType::class, [
+                "required" => false
+            ]);
 
         $builder->get('tags')
-        ->addModelTransformer($this->transformer);
+            ->addModelTransformer($this->transformer);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
