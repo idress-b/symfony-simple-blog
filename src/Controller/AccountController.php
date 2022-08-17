@@ -21,16 +21,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class AccountController extends AbstractController
 {
-    /**
-     * @Route("/", name="index")
-     */
-    public function index(): Response
-    {
-        return $this->render('account/index.html.twig', []);
-    }
+    // /**
+    //  * @Route("/", name="index")
+    //  */
+    // public function index(): Response
+    // {
+    //     return $this->render('account/index.html.twig', []);
+    // }
 
     /**
-     * @Route("/tous-les-articles", name="show_posts")
+     * @Route("/", name="show_posts")
      */
     public function ShowPosts(PostRepository $repository, Request $request, PaginatorInterface $paginator): Response
     {

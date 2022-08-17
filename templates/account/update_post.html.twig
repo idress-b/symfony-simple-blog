@@ -4,11 +4,13 @@ article' %} {% block body %}
   <h1 class="my-5">Modifier un article</h1>
   {{ form_start(form) }}
   {{ form_row(form.title) }}
+  {{ form_row(form.category) }}
+  {{ form_row(form.tags) }}
   <img width="500" src="{{ img }}" id="file-preview" alt="" />
   {{ form_row(form.file) }}
   <p>Corps de l'article</p>
   <div id="editor"></div>
-  <button type="submit" class="btn btn-primary">Valider la Modification</button>
+  <button type="submit" class="mt-4 btn btn-primary">Valider la Modification</button>
   {{ form_end(form) }}
 </div>
 

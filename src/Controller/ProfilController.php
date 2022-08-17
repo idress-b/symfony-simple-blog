@@ -35,7 +35,7 @@ class ProfilController extends AbstractController
             $em->flush();
             return $this->redirectToRoute("profil");
         }
-        $avatar = $user->getAvatar();
+        $avatar = $user->getAvatarUrl();
         if ($avatar == null) {
             $avatar = 'avatar.jpg';
         }

@@ -29,7 +29,7 @@
 			<div class="row flex-nowrap">
 				<div class="col-auto  col-xl-2 px-sm-2 px-0 bg-dark min-vh-100 admin-sidebar">
 					<div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 position-fixed">
-						<img width="40" class=" d-md-inline mb-5 img-fluid border-bottom pb-3" src="{{ asset('img/icon-logo-clair.png') }}" alt="logo">
+						<img width="140" class=" d-md-inline mb-5 img-fluid border-bottom pb-3" src="{{ asset('img/logo_clair_200.png') }}" alt="logo">
 
 						<ul class="nav nav-admin nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-md-start" id="menu">
 							<li class="nav-item">
@@ -64,7 +64,7 @@
 						<hr>
 						<div class="dropdown pb-4">
 							<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-								<img src="/uploads/{{ app.user.avatar }}" alt="user photo" width="40" height="40" class="rounded-circle">
+								<img src="{{ app.user.getAvatarUrl }}" alt="user photo" width="40" height="40" class="rounded-circle">
 								<span class="d-none d-md-inline mx-1">{{ app.user }}</span>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-dark text-small shadow">
