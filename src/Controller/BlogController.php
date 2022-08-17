@@ -51,7 +51,7 @@ class BlogController extends AbstractController
         );
 
         // par ailleurs je récupère les tags 
-        $tags = $tagRepository->findBy(array(), null, 30);
+        $tags = $tagRepository->findBy(array(), null, 15);
 
         return $this->render('blog/index.html.twig', [
             'posts' => $posts,
