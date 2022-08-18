@@ -6,6 +6,7 @@ use App\Entity\Post;
 
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use App\Repository\TagRepository;
 use App\Service\FileUploader;
 use Knp\Component\Pager\Paginator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -64,6 +65,15 @@ class AccountController extends AbstractController
         $form = $this->createForm(PostType::class, $post, ["validation_groups" => ["Default", "create"]])
             ->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            // ajout des tags
+            $tags = $form->get('tags')->getData();
+            if ($tags) {
+
+                foreach ($tags as $tag) {
+                    $post->addTag($tag);
+                }
+            }
+            // gestion des images
             $file = $form->get("file")->getData();
             if ($file) {
 
@@ -136,6 +146,7 @@ class AccountController extends AbstractController
         EntityManagerInterface $em,
         PostRepository $postRepository,
         Post $post,
+        TagRepository $tagRepository,
         FileUploader $fileUploader
     ) {
         $imageFile = $post->getImage();
@@ -144,6 +155,22 @@ class AccountController extends AbstractController
             $fileUploader->deleteFile($imageFile);
         }
 
+        $tags = $post->getTags();
+       
+        // suppression des tags
+
+        if ($tags !== null) {
+       
+            foreach ($tags as $tag) {
+                $post->removeTag($tag);
+               
+                if (count($tag->getPost()) == 0 ){
+                   
+                    $tagRepository->remove($tag,true);
+                   
+                }
+            }
+        }
 
         $postRepository->remove($post);
         $em->flush();
