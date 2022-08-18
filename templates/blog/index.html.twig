@@ -45,7 +45,7 @@ app.request.get('page') == null %}
 
 													{% for tag in post.tags %}
 														<a class="text-decoration-none text-dark" href="{{path("app_tag",{id: tag.id})}}">
-															<span class="hashtag">{{ tag }}</span>
+															<span class="hashtag">#{{ tag }}</span>
 														</a>
 													{% endfor %}
 
@@ -88,7 +88,7 @@ app.request.get('page') == null %}
 							<p class="fw-bold">Tags populaires</p><hr>
 							{% for tag in tags %}
 								<a class="text-decoration-none text-dark" href="{{path("app_tag",{id: tag.id})}}">
-									<span class="hashtag">{{tag}}</span>
+									<span class="hashtag">#{{tag}}</span>
 								</a>
 							{% endfor %}
 						</p>

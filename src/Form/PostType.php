@@ -47,7 +47,8 @@ class PostType extends AbstractType
                 ]
             ])
             ->add('tags', TextType::class, [
-                "required" => false
+                "required" => false,
+                "help"=>"Séparez les tags par une virgule"
             ]);
 
         $builder->get('tags')

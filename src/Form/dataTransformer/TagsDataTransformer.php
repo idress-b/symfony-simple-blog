@@ -26,6 +26,8 @@ class TagsDataTransformer implements DataTransformerInterface
         $tagsCollection = new ArrayCollection();
 
         foreach($tagsArray as $tagName){
+            $tagName = trim($tagName);
+            if ($tagName==''){continue;}
             $tag = $this->em->getRepository(Tag::class)->findOneBy(['name'=>trim($tagName)]);
 
             if($tag === null){

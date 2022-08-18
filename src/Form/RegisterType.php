@@ -31,7 +31,9 @@ class RegisterType extends AbstractType
 
             ->add('password',RepeatedType::class, [
                 'type'=> PasswordType::class,
-                'first_options' => [ 'label'=> 'Saisir votre mot de passe'],
+                'first_options' => [ 
+                    'label'=> 'Saisir votre mot de passe',
+                    'help'=>'le mot de passe doit contenir 6 caractères au minimum'],
                 'second_options' => [ 'label' => 'Confirmer votre mot de passe'],
                 'invalid_message' => "Le mot de passe et la confirmation doivent être identiques",
                 'constraints' => [
