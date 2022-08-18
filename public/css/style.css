@@ -243,9 +243,11 @@ display:none;
     border: 0.2px solid rgb(212, 211, 211);
     border-radius: 7px;
 }
-.hashtag:hover{
-    
-    background:#c7c7c8;
-    
-}
 
+.hashtag:hover{
+       background:#c7c7c8;
+   }
+
+.tag-container{
+    line-height:2.2;
+}

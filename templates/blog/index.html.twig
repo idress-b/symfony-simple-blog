@@ -84,7 +84,7 @@ app.request.get('page') == null %}
 
 						</div>
 						<!--------------------- Tags populaires  ------------------------------->
-						<div class="mb-4 mx-3 mx-lg-0 p-3 border  bg-white rounded-2">
+						<div class="mb-4 mx-3 mx-lg-0 p-3 border  bg-white rounded-2 tag-container">
 							<p class="fw-bold">Tags populaires</p><hr>
 							{% for tag in tags %}
 								<a class="text-decoration-none text-dark" href="{{path("app_tag",{id: tag.id})}}">
