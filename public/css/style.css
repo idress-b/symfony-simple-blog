@@ -236,16 +236,18 @@ display:none;
     min-height: 400px;
 }
 /******************************* hashtag *****************************/
+
+
 .hashtag{
     padding:0.2rem 0.5rem 0 0.5rem;
-}
-.hashtag::before{
-    content:'#';
+    border: 0.2px solid rgb(212, 211, 211);
+    border-radius: 7px;
 }
 
 .hashtag:hover{
-    
-    background:#c7c7c8;
-    border-radius: 7px;
-    /* padding:0.2rem 0.5rem 0 0.5rem; */
+       background:#c7c7c8;
+   }
+
+.tag-container{
+    line-height:2.2;
 }
