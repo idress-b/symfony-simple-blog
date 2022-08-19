@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -21,12 +22,10 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        //return parent::index();
-        //  return $this->render('account/contact.html.twig', [
-        //     'dashboard_controller_filepath' => (new \ReflectionClass(static::class))->getFileName(),
-        //     'dashboard_controller_class' => (new \ReflectionClass(static::class))->getShortName(),
-        // ]);
-        return $this->render('admin/index.html.twig');
+        // return parent::index();
+        $routeBuilder = $this->get(AdminUrlGenerator::class);
+
+        return $this->redirect($routeBuilder->setController(UserCrudController::class)->generateUrl());
     }
 
     public function configureDashboard(): Dashboard
@@ -39,7 +38,8 @@ class DashboardController extends AbstractDashboardController
     {
 
         yield MenuItem::linkToUrl('Aller sur le site', 'fa fa-home', $this->generateUrl('index'));
-        yield MenuItem::linkToDashboard('Accueil  ', 'fas fa-chalkboard-teacher');
+        yield MenuItem::linkToUrl('Compte auteur', 'fas fa-house-user', $this->generateUrl('profil'));
+        // yield MenuItem::linkToDashboard('Accueil  ', 'fas fa-chalkboard-teacher');
         yield MenuItem::linkToCrud('Auteurs', 'fas fa-user', User::class)
             ->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Articles', 'fas fa-file-alt', Post::class);
