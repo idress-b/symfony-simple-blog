@@ -52,11 +52,15 @@ class ProfilController extends AbstractController
     /**
      * @Route("/compte/profil/delete-avatar", name="profil_delete")
      */
-    public function deleteAvatar(EntityManagerInterface $em,  string $uploadsAbsoluteDir)
+    public function deleteAvatar(EntityManagerInterface $em)
     {
         $user = $this->getUser();
 
-
+        $currentImg = $user->getAvatar();
+        if ($currentImg == "avatar.jpg") {
+            $this->addFlash('danger', 'Image de profil absente');
+            return $this->redirectToRoute("profil");
+        }
         // on met une image d'avatar vide
         $user->setAvatar('avatar.jpg');
         $em->flush();
