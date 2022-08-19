@@ -21,7 +21,7 @@ class ProfilController extends AbstractController
         EntityManagerInterface $em,
         SluggerInterface $slugger,
         FileUploader $fileUploader
-        
+
     ): Response {
         $user = $this->getUser();
         $form = $this->createForm(ProfilType::class, $user)->handleRequest($request);
@@ -33,6 +33,8 @@ class ProfilController extends AbstractController
                 $user->setAvatar($fileName);
             }
             $em->flush();
+            $this->addFlash('success', 'Profil mis à jour avec succès');
+
             return $this->redirectToRoute("profil");
         }
         $avatar = $user->getAvatarUrl();
