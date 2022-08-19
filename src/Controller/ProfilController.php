@@ -33,6 +33,7 @@ class ProfilController extends AbstractController
                 $user->setAvatar($fileName);
             }
             $em->flush();
+
             $this->addFlash('success', 'Profil mis à jour avec succès');
 
             return $this->redirectToRoute("profil");
@@ -55,14 +56,11 @@ class ProfilController extends AbstractController
     {
         $user = $this->getUser();
 
-        // On tocke l'ancienne image et on la supprime du dossier
-        $tempImg = $user->getAvatar();
-        $tempFile = $uploadsAbsoluteDir . "/" . $tempImg;
-        unlink($tempFile);
 
         // on met une image d'avatar vide
         $user->setAvatar('avatar.jpg');
         $em->flush();
+        $this->addFlash('success', 'Image de profil supprimée avec succès');
         return $this->redirectToRoute("profil");
     }
 }
